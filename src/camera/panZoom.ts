@@ -1,8 +1,8 @@
-import { MOUSE_BUTTONS } from '@magic/utils/mouse';
-import { useLocalStorage } from '@vueuse/core';
-import { localKeys } from '../localStorage';
+import { useLocalStorage } from "@vueuse/core";
+import { localKeys } from "../localStorage";
 
-import { type Ref, onMounted } from 'vue';
+import { type Ref, onMounted } from "vue";
+import { MOUSE_BUTTONS } from "magic-utils-yonava";
 
 export const MIN_ZOOM = 0.2;
 export const MAX_ZOOM = 10;
@@ -12,13 +12,13 @@ export const PAN_SENSITIVITY = 1;
 
 export const usePanAndZoom = (
   canvas: Ref<HTMLCanvasElement | undefined>,
-  storageKey: string,
+  storageKey: string
 ) => {
   const panX = useLocalStorage(localKeys.cameraPanX(storageKey), 0);
   const panY = useLocalStorage(localKeys.cameraPanY(storageKey), 0);
   const zoom = useLocalStorage(localKeys.cameraZoom(storageKey), 1);
 
-  const setZoom = (ev: Pick<WheelEvent, 'clientX' | 'clientY' | 'deltaY'>) => {
+  const setZoom = (ev: Pick<WheelEvent, "clientX" | "clientY" | "deltaY">) => {
     const rect = canvas.value!.getBoundingClientRect();
     const cx = ev.clientX - rect.left;
     const cy = ev.clientY - rect.top;
@@ -28,7 +28,7 @@ export const usePanAndZoom = (
     const zoomFactor = Math.exp(-normalizedDelta * ZOOM_SENSITIVITY);
     const clampedZoom = Math.min(
       MAX_ZOOM,
-      Math.max(MIN_ZOOM, zoom.value * zoomFactor),
+      Math.max(MIN_ZOOM, zoom.value * zoomFactor)
     );
 
     const scale = clampedZoom / zoom.value;
@@ -38,7 +38,7 @@ export const usePanAndZoom = (
     zoom.value = clampedZoom;
   };
 
-  const setPan = (ev: Pick<WheelEvent, 'deltaX' | 'deltaY'>) => {
+  const setPan = (ev: Pick<WheelEvent, "deltaX" | "deltaY">) => {
     panX.value -= ev.deltaX * PAN_SENSITIVITY;
     panY.value -= ev.deltaY * PAN_SENSITIVITY;
   };
@@ -82,11 +82,11 @@ export const usePanAndZoom = (
   };
 
   onMounted(() => {
-    if (!canvas.value) throw new Error('canvas not found in DOM');
-    canvas.value.addEventListener('wheel', onWheel, { passive: false });
-    canvas.value.addEventListener('mousedown', onMousedown);
-    canvas.value.addEventListener('mousemove', onMousemove);
-    document.addEventListener('mouseup', onMouseup);
+    if (!canvas.value) throw new Error("canvas not found in DOM");
+    canvas.value.addEventListener("wheel", onWheel, { passive: false });
+    canvas.value.addEventListener("mousedown", onMousedown);
+    canvas.value.addEventListener("mousemove", onMousemove);
+    document.addEventListener("mouseup", onMouseup);
   });
 
   return {
@@ -116,10 +116,10 @@ export const usePanAndZoom = (
       translateY: panY.value,
     }),
     cleanup: (ref: HTMLCanvasElement) => {
-      ref.removeEventListener('wheel', onWheel);
-      ref.removeEventListener('mousedown', onMousedown);
-      ref.removeEventListener('mousemove', onMousemove);
-      document.removeEventListener('mouseup', onMouseup);
+      ref.removeEventListener("wheel", onWheel);
+      ref.removeEventListener("mousedown", onMousedown);
+      ref.removeEventListener("mousemove", onMousemove);
+      document.removeEventListener("mouseup", onMouseup);
     },
   };
 };

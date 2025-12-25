@@ -1,8 +1,8 @@
-import { getDevicePixelRatio } from '../camera/utils';
-import { getCtx } from '@magic/utils/ctx'
+import { getDevicePixelRatio } from "../camera/utils";
 
-import { type Ref, onMounted, ref } from 'vue';
-import { Coordinate } from '../types';
+import { type Ref, onMounted, ref } from "vue";
+import { Coordinate } from "../types";
+import { getCtx } from "magic-utils-yonava";
 
 export const getCanvasTransform = (ctx: CanvasRenderingContext2D) => {
   const { a, e, f } = ctx.getTransform();
@@ -17,7 +17,7 @@ export const getCanvasTransform = (ctx: CanvasRenderingContext2D) => {
 /**
  * the coordinates in the real world. aka the browser
  */
-export type ClientCoords = Pick<MouseEvent, 'clientX' | 'clientY'>;
+export type ClientCoords = Pick<MouseEvent, "clientX" | "clientY">;
 
 /**
  * the coordinates in the magic canvas world
@@ -39,7 +39,7 @@ export type WithZoom<T> = T & {
  */
 export const getMagicCoordinates = (
   clientCoords: ClientCoords,
-  ctx: CanvasRenderingContext2D,
+  ctx: CanvasRenderingContext2D
 ): WithZoom<MagicCoords> => {
   const rect = ctx.canvas.getBoundingClientRect();
   const localX = clientCoords.clientX - rect.left;
@@ -60,7 +60,7 @@ export const getMagicCoordinates = (
  */
 export const getClientCoordinates = (
   magicCoords: MagicCoords,
-  ctx: CanvasRenderingContext2D,
+  ctx: CanvasRenderingContext2D
 ): WithZoom<ClientCoords> => {
   const { panX, panY, zoom } = getCanvasTransform(ctx);
   const { x, y } = magicCoords;
@@ -73,7 +73,7 @@ export const getClientCoordinates = (
 };
 
 export const useMagicCoordinates = (
-  canvas: Ref<HTMLCanvasElement | undefined>,
+  canvas: Ref<HTMLCanvasElement | undefined>
 ) => {
   const coordinates = ref<MagicCoords>({ x: 0, y: 0 });
   const captureCoords = (ev: MouseEvent) =>
@@ -81,16 +81,16 @@ export const useMagicCoordinates = (
 
   onMounted(() => {
     if (!canvas.value)
-      throw new Error('Canvas not found in DOM. Check ref link.');
-    canvas.value.addEventListener('mousemove', captureCoords);
-    canvas.value.addEventListener('wheel', captureCoords);
+      throw new Error("Canvas not found in DOM. Check ref link.");
+    canvas.value.addEventListener("mousemove", captureCoords);
+    canvas.value.addEventListener("wheel", captureCoords);
   });
 
   return {
     coordinates,
     cleanup: (ref: HTMLCanvasElement) => {
-      ref.removeEventListener('mousemove', captureCoords);
-      ref.removeEventListener('wheel', captureCoords);
+      ref.removeEventListener("mousemove", captureCoords);
+      ref.removeEventListener("wheel", captureCoords);
     },
   };
 };
