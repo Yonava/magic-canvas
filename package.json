@@ -1,13 +1,22 @@
 {
-  "name": "magic-canvas",
+  "name": "magic-canvas-yonava",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "exports": {
+    "./*": "./src/*"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module"
+  "scripts": {
+    "build:types": "tsc -b ."
+  },
+  "peerDependencies": {
+    "vue": "^3.5.18"
+  },
+  "dependencies": {
+
+    "@vueuse/core": "^13.6.0",
+    "magic-utils-yonava": "^1.0.7",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.8.1"
+  }
 }
