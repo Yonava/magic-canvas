@@ -1,6 +1,6 @@
 {
   "name": "magic-canvas-yonava",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
