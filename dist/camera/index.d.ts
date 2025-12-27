@@ -1,4 +1,4 @@
-import type { Ref } from 'vue';
+import { Ref } from 'vue';
 export declare const useCamera: (canvas: Ref<HTMLCanvasElement | undefined>, storageKey: string) => {
     transformAndClear: (ctx: CanvasRenderingContext2D) => void;
     actions: {
@@ -6,9 +6,9 @@ export declare const useCamera: (canvas: Ref<HTMLCanvasElement | undefined>, sto
         zoomOut: (decrement?: number) => void;
     };
     state: {
-        panX: import("@vueuse/shared").RemovableRef<number>;
-        panY: import("@vueuse/shared").RemovableRef<number>;
-        zoom: import("@vueuse/shared").RemovableRef<number>;
+        panX: import('@vueuse/shared').RemovableRef<number>;
+        panY: import('@vueuse/shared').RemovableRef<number>;
+        zoom: import('@vueuse/shared').RemovableRef<number>;
     };
     cleanup: (ref: HTMLCanvasElement) => void;
 };

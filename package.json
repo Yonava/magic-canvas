@@ -1,8 +1,8 @@
 {
   "name": "magic-canvas-yonava",
-  "version": "1.0.4",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "version": "1.0.9",
+  "main": "dist/index.es.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
@@ -12,16 +12,21 @@
     }
   },
   "scripts": {
-    "build:types": "vue-tsc -b .",
-    "republish": "rm -rf dist && npm run build:types && npm publish"
+    "build": "vue-tsc -b . && vite build",
+    "republish": "rm -rf dist && npm run build && npm publish"
   },
   "peerDependencies": {
     "vue": "^3.5.18"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "@vitejs/plugin-vue": "^6.0.3",
     "@vueuse/core": "^13.6.0",
-    "magic-utils-yonava": "^1.0.7",
-    "tailwind-merge": "^3.3.1"
+    "magic-utils-yonava": "^1.0.11",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.18",
+    "vite": "^7.3.0",
+    "vite-plugin-dts": "^4.5.4"
   },
   "devDependencies": {
     "@types/node": "^24.8.1",

@@ -1,5 +1,5 @@
-import { type Ref } from "vue";
-import { Coordinate } from "../types";
+import { Ref } from 'vue';
+import { Coordinate } from '../types';
 export declare const getCanvasTransform: (ctx: CanvasRenderingContext2D) => {
     panX: number;
     panY: number;

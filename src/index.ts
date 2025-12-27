@@ -1,10 +1,11 @@
+import "./tailwind.css";
 import MagicCanvas from "./MagicCanvas.vue";
 import { App } from "vue";
 
-export * from "./types";
-export * from "./useMagicCanvas";
-export * from "./coordinates";
-export { getDevicePixelRatio } from "./camera/utils";
+export * from "./types.js";
+export * from "./useMagicCanvas.js";
+export * from "./coordinates/index.js";
+export { getDevicePixelRatio } from "./camera/utils.js";
 export { MagicCanvas };
 declare module "vue" {
   export interface GlobalComponents {
@@ -12,7 +13,7 @@ declare module "vue" {
   }
 }
 
-export default {
+export const MagicCanvasPlugin = {
   install(app: App) {
     app.component("MagicCanvas", MagicCanvas);
   },

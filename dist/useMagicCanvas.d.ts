@@ -1,2 +1,2 @@
-import type { UseMagicCanvas } from "./types";
+import { UseMagicCanvas } from './types';
 export declare const useMagicCanvas: UseMagicCanvas;

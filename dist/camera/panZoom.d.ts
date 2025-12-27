@@ -1,4 +1,4 @@
-import { type Ref } from "vue";
+import { Ref } from 'vue';
 export declare const MIN_ZOOM = 0.2;
 export declare const MAX_ZOOM = 10;
 export declare const ZOOM_SENSITIVITY = 0.02;
@@ -9,9 +9,9 @@ export declare const usePanAndZoom: (canvas: Ref<HTMLCanvasElement | undefined>,
         zoomOut: (decrement?: number) => void;
     };
     state: {
-        panX: import("@vueuse/shared").RemovableRef<number>;
-        panY: import("@vueuse/shared").RemovableRef<number>;
-        zoom: import("@vueuse/shared").RemovableRef<number>;
+        panX: import('@vueuse/shared').RemovableRef<number>;
+        panY: import('@vueuse/shared').RemovableRef<number>;
+        zoom: import('@vueuse/shared').RemovableRef<number>;
     };
     getTransform: () => {
         scaleX: number;
