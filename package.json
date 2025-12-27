@@ -1,6 +1,6 @@
 {
   "name": "magic-canvas-yonava",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "main": "dist/index.es.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,6 +12,7 @@
     }
   },
   "scripts": {
+    "dev": "vite",
     "build": "vue-tsc -b . && vite build",
     "republish": "rm -rf dist && npm run build && npm publish"
   },
