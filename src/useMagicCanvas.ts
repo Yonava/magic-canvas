@@ -34,9 +34,10 @@ export const useMagicCanvas: UseMagicCanvas = (options = {}) => {
     repaintInterval = setInterval(repaintCanvas, 1000 / REPAINT_FPS);
   });
 
-  watch([canvasBoxSize.width, canvasBoxSize.height], () =>
-    initCanvasWidthHeight(canvas.value)
-  );
+  // watch([canvasBoxSize.width, canvasBoxSize.height], () => {
+  //   initCanvasWidthHeight(canvas.value);
+  //   console.log("initting");
+  // });
 
   const { cleanup: cleanupCamera, ...camera } = useCamera(
     canvas,

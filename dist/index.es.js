@@ -1,66 +1,66 @@
-import { defineComponent as it, ref as B, onMounted as Z, onBeforeUnmount as lt, createElementBlock as ct, openBlock as dt, mergeProps as ut, unref as Fe, nextTick as We, getCurrentScope as mt, onScopeDispose as ft, getCurrentInstance as je, readonly as Be, watch as H, toRef as pt, customRef as gt, computed as Q, shallowRef as fe, toValue as D } from "vue";
-const bt = (e, t) => {
+import { defineComponent as at, ref as B, onMounted as Z, onBeforeUnmount as it, createElementBlock as lt, openBlock as ct, mergeProps as dt, unref as Xe, nextTick as Fe, getCurrentScope as ut, onScopeDispose as mt, getCurrentInstance as We, readonly as je, watch as K, toRef as ft, customRef as pt, computed as Q, shallowRef as fe, toValue as D } from "vue";
+const gt = (e, t) => {
   const o = new Array(e.length + t.length);
   for (let r = 0; r < e.length; r++)
     o[r] = e[r];
   for (let r = 0; r < t.length; r++)
     o[e.length + r] = t[r];
   return o;
-}, ht = (e, t) => ({
+}, bt = (e, t) => ({
   classGroupId: e,
   validator: t
-}), De = (e = /* @__PURE__ */ new Map(), t = null, o) => ({
+}), Be = (e = /* @__PURE__ */ new Map(), t = null, o) => ({
   nextPart: e,
   validators: t,
   classGroupId: o
-}), pe = "-", Te = [], vt = "arbitrary..", wt = (e) => {
-  const t = kt(e), {
+}), pe = "-", Te = [], ht = "arbitrary..", vt = (e) => {
+  const t = yt(e), {
     conflictingClassGroups: o,
     conflictingClassGroupModifiers: r
   } = e;
   return {
     getClassGroupId: (s) => {
       if (s.startsWith("[") && s.endsWith("]"))
-        return yt(s);
+        return wt(s);
       const i = s.split(pe), l = i[0] === "" && i.length > 1 ? 1 : 0;
-      return Ve(i, l, t);
+      return De(i, l, t);
     },
     getConflictingClassGroupIds: (s, i) => {
       if (i) {
-        const l = r[s], u = o[s];
-        return l ? u ? bt(u, l) : l : u || Te;
+        const l = r[s], m = o[s];
+        return l ? m ? gt(m, l) : l : m || Te;
       }
       return o[s] || Te;
     }
   };
-}, Ve = (e, t, o) => {
+}, De = (e, t, o) => {
   if (e.length - t === 0)
     return o.classGroupId;
   const n = e[t], a = o.nextPart.get(n);
   if (a) {
-    const u = Ve(e, t + 1, a);
-    if (u) return u;
+    const m = De(e, t + 1, a);
+    if (m) return m;
   }
   const s = o.validators;
   if (s === null)
     return;
   const i = t === 0 ? e.join(pe) : e.slice(t).join(pe), l = s.length;
-  for (let u = 0; u < l; u++) {
-    const b = s[u];
+  for (let m = 0; m < l; m++) {
+    const b = s[m];
     if (b.validator(i))
       return b.classGroupId;
   }
-}, yt = (e) => e.slice(1, -1).indexOf(":") === -1 ? void 0 : (() => {
+}, wt = (e) => e.slice(1, -1).indexOf(":") === -1 ? void 0 : (() => {
   const t = e.slice(1, -1), o = t.indexOf(":"), r = t.slice(0, o);
-  return r ? vt + r : void 0;
-})(), kt = (e) => {
+  return r ? ht + r : void 0;
+})(), yt = (e) => {
   const {
     theme: t,
     classGroups: o
   } = e;
-  return xt(o, t);
-}, xt = (e, t) => {
-  const o = De();
+  return kt(o, t);
+}, kt = (e, t) => {
+  const o = Be();
   for (const r in e) {
     const n = e[r];
     Ce(n, o, r, t);
@@ -70,43 +70,43 @@ const bt = (e, t) => {
   const n = e.length;
   for (let a = 0; a < n; a++) {
     const s = e[a];
-    Ct(s, t, o, r);
+    xt(s, t, o, r);
   }
-}, Ct = (e, t, o, r) => {
+}, xt = (e, t, o, r) => {
   if (typeof e == "string") {
-    St(e, t, o);
+    Ct(e, t, o);
     return;
   }
   if (typeof e == "function") {
-    zt(e, t, o, r);
+    St(e, t, o, r);
     return;
   }
-  At(e, t, o, r);
-}, St = (e, t, o) => {
-  const r = e === "" ? t : $e(t, e);
+  zt(e, t, o, r);
+}, Ct = (e, t, o) => {
+  const r = e === "" ? t : Ve(t, e);
   r.classGroupId = o;
-}, zt = (e, t, o, r) => {
-  if (Mt(e)) {
+}, St = (e, t, o, r) => {
+  if (At(e)) {
     Ce(e(r), t, o, r);
     return;
   }
-  t.validators === null && (t.validators = []), t.validators.push(ht(o, e));
-}, At = (e, t, o, r) => {
+  t.validators === null && (t.validators = []), t.validators.push(bt(o, e));
+}, zt = (e, t, o, r) => {
   const n = Object.entries(e), a = n.length;
   for (let s = 0; s < a; s++) {
     const [i, l] = n[s];
-    Ce(l, $e(t, i), o, r);
+    Ce(l, Ve(t, i), o, r);
   }
-}, $e = (e, t) => {
+}, Ve = (e, t) => {
   let o = e;
   const r = t.split(pe), n = r.length;
   for (let a = 0; a < n; a++) {
     const s = r[a];
     let i = o.nextPart.get(s);
-    i || (i = De(), o.nextPart.set(s, i)), o = i;
+    i || (i = Be(), o.nextPart.set(s, i)), o = i;
   }
   return o;
-}, Mt = (e) => "isThemeGetter" in e && e.isThemeGetter === !0, Rt = (e) => {
+}, At = (e) => "isThemeGetter" in e && e.isThemeGetter === !0, Mt = (e) => {
   if (e < 1)
     return {
       get: () => {
@@ -130,20 +130,20 @@ const bt = (e, t) => {
       a in o ? o[a] = s : n(a, s);
     }
   };
-}, ke = "!", Pe = ":", Et = [], Oe = (e, t, o, r, n) => ({
+}, ke = "!", Pe = ":", Rt = [], Oe = (e, t, o, r, n) => ({
   modifiers: e,
   hasImportantModifier: t,
   baseClassName: o,
   maybePostfixModifierPosition: r,
   isExternal: n
-}), Tt = (e) => {
+}), Et = (e) => {
   const {
     prefix: t,
     experimentalParseClassName: o
   } = e;
   let r = (n) => {
     const a = [];
-    let s = 0, i = 0, l = 0, u;
+    let s = 0, i = 0, l = 0, m;
     const b = n.length;
     for (let y = 0; y < b; y++) {
       const k = n[y];
@@ -153,27 +153,27 @@ const bt = (e, t) => {
           continue;
         }
         if (k === "/") {
-          u = y;
+          m = y;
           continue;
         }
       }
       k === "[" ? s++ : k === "]" ? s-- : k === "(" ? i++ : k === ")" && i--;
     }
-    const m = a.length === 0 ? n : n.slice(l);
-    let w = m, C = !1;
-    m.endsWith(ke) ? (w = m.slice(0, -1), C = !0) : (
+    const u = a.length === 0 ? n : n.slice(l);
+    let w = u, C = !1;
+    u.endsWith(ke) ? (w = u.slice(0, -1), C = !0) : (
       /**
        * In Tailwind CSS v3 the important modifier was at the start of the base class name. This is still supported for legacy reasons.
        * @see https://github.com/dcastil/tailwind-merge/issues/513#issuecomment-2614029864
        */
-      m.startsWith(ke) && (w = m.slice(1), C = !0)
+      u.startsWith(ke) && (w = u.slice(1), C = !0)
     );
-    const f = u && u > l ? u - l : void 0;
+    const f = m && m > l ? m - l : void 0;
     return Oe(a, C, w, f);
   };
   if (t) {
     const n = t + Pe, a = r;
-    r = (s) => s.startsWith(n) ? a(s.slice(n.length)) : Oe(Et, !1, s, void 0, !0);
+    r = (s) => s.startsWith(n) ? a(s.slice(n.length)) : Oe(Rt, !1, s, void 0, !0);
   }
   if (o) {
     const n = r;
@@ -183,7 +183,7 @@ const bt = (e, t) => {
     });
   }
   return r;
-}, Pt = (e) => {
+}, Tt = (e) => {
   const t = /* @__PURE__ */ new Map();
   return e.orderSensitiveModifiers.forEach((o, r) => {
     t.set(o, 1e6 + r);
@@ -196,28 +196,28 @@ const bt = (e, t) => {
     }
     return n.length > 0 && (n.sort(), r.push(...n)), r;
   };
-}, Ot = (e) => ({
-  cache: Rt(e.cacheSize),
-  parseClassName: Tt(e),
-  sortModifiers: Pt(e),
-  ...wt(e)
-}), It = /\s+/, Yt = (e, t) => {
+}, Pt = (e) => ({
+  cache: Mt(e.cacheSize),
+  parseClassName: Et(e),
+  sortModifiers: Tt(e),
+  ...vt(e)
+}), Ot = /\s+/, It = (e, t) => {
   const {
     parseClassName: o,
     getClassGroupId: r,
     getConflictingClassGroupIds: n,
     sortModifiers: a
-  } = t, s = [], i = e.trim().split(It);
+  } = t, s = [], i = e.trim().split(Ot);
   let l = "";
-  for (let u = i.length - 1; u >= 0; u -= 1) {
-    const b = i[u], {
-      isExternal: m,
+  for (let m = i.length - 1; m >= 0; m -= 1) {
+    const b = i[m], {
+      isExternal: u,
       modifiers: w,
       hasImportantModifier: C,
       baseClassName: f,
       maybePostfixModifierPosition: y
     } = o(b);
-    if (m) {
+    if (u) {
       l = b + (l.length > 0 ? " " + l : l);
       continue;
     }
@@ -245,47 +245,47 @@ const bt = (e, t) => {
     l = b + (l.length > 0 ? " " + l : l);
   }
   return l;
-}, Lt = (...e) => {
+}, Yt = (...e) => {
   let t = 0, o, r, n = "";
   for (; t < e.length; )
-    (o = e[t++]) && (r = Ue(o)) && (n && (n += " "), n += r);
+    (o = e[t++]) && (r = $e(o)) && (n && (n += " "), n += r);
   return n;
-}, Ue = (e) => {
+}, $e = (e) => {
   if (typeof e == "string")
     return e;
   let t, o = "";
   for (let r = 0; r < e.length; r++)
-    e[r] && (t = Ue(e[r])) && (o && (o += " "), o += t);
+    e[r] && (t = $e(e[r])) && (o && (o += " "), o += t);
   return o;
-}, Nt = (e, ...t) => {
+}, Lt = (e, ...t) => {
   let o, r, n, a;
   const s = (l) => {
-    const u = t.reduce((b, m) => m(b), e());
-    return o = Ot(u), r = o.cache.get, n = o.cache.set, a = i, i(l);
+    const m = t.reduce((b, u) => u(b), e());
+    return o = Pt(m), r = o.cache.get, n = o.cache.set, a = i, i(l);
   }, i = (l) => {
-    const u = r(l);
-    if (u)
-      return u;
-    const b = Yt(l, o);
+    const m = r(l);
+    if (m)
+      return m;
+    const b = It(l, o);
     return n(l, b), b;
   };
-  return a = s, (...l) => a(Lt(...l));
-}, _t = [], z = (e) => {
-  const t = (o) => o[e] || _t;
+  return a = s, (...l) => a(Yt(...l));
+}, Nt = [], z = (e) => {
+  const t = (o) => o[e] || Nt;
   return t.isThemeGetter = !0, t;
-}, Ze = /^\[(?:(\w[\w-]*):)?(.+)\]$/i, He = /^\((?:(\w[\w-]*):)?(.+)\)$/i, Gt = /^\d+\/\d+$/, Xt = /^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/, Ft = /\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|\b(calc|min|max|clamp)\(.+\)|^0$/, Wt = /^(rgba?|hsla?|hwb|(ok)?(lab|lch)|color-mix)\(.+\)$/, jt = /^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/, Bt = /^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/, V = (e) => Gt.test(e), v = (e) => !!e && !Number.isNaN(Number(e)), G = (e) => !!e && Number.isInteger(Number(e)), he = (e) => e.endsWith("%") && v(e.slice(0, -1)), _ = (e) => Xt.test(e), Dt = () => !0, Vt = (e) => (
+}, Ue = /^\[(?:(\w[\w-]*):)?(.+)\]$/i, Ze = /^\((?:(\w[\w-]*):)?(.+)\)$/i, _t = /^\d+\/\d+$/, Gt = /^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/, Xt = /\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|\b(calc|min|max|clamp)\(.+\)|^0$/, Ft = /^(rgba?|hsla?|hwb|(ok)?(lab|lch)|color-mix)\(.+\)$/, Wt = /^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/, jt = /^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/, V = (e) => _t.test(e), v = (e) => !!e && !Number.isNaN(Number(e)), G = (e) => !!e && Number.isInteger(Number(e)), he = (e) => e.endsWith("%") && v(e.slice(0, -1)), _ = (e) => Gt.test(e), Bt = () => !0, Dt = (e) => (
   // `colorFunctionRegex` check is necessary because color functions can have percentages in them which which would be incorrectly classified as lengths.
   // For example, `hsl(0 0% 0%)` would be classified as a length without this check.
   // I could also use lookbehind assertion in `lengthUnitRegex` but that isn't supported widely enough.
-  Ft.test(e) && !Wt.test(e)
-), Je = () => !1, $t = (e) => jt.test(e), Ut = (e) => Bt.test(e), Zt = (e) => !c(e) && !d(e), Ht = (e) => J(e, Qe, Je), c = (e) => Ze.test(e), W = (e) => J(e, et, Vt), ve = (e) => J(e, eo, v), Ie = (e) => J(e, qe, Je), Jt = (e) => J(e, Ke, Ut), ie = (e) => J(e, tt, $t), d = (e) => He.test(e), K = (e) => q(e, et), qt = (e) => q(e, to), Ye = (e) => q(e, qe), Kt = (e) => q(e, Qe), Qt = (e) => q(e, Ke), le = (e) => q(e, tt, !0), J = (e, t, o) => {
-  const r = Ze.exec(e);
+  Xt.test(e) && !Ft.test(e)
+), He = () => !1, Vt = (e) => Wt.test(e), $t = (e) => jt.test(e), Ut = (e) => !c(e) && !d(e), Zt = (e) => H(e, Ke, He), c = (e) => Ue.test(e), W = (e) => H(e, Qe, Dt), ve = (e) => H(e, Qt, v), Ie = (e) => H(e, Je, He), Ht = (e) => H(e, qe, $t), ie = (e) => H(e, et, Vt), d = (e) => Ze.test(e), q = (e) => J(e, Qe), Jt = (e) => J(e, eo), Ye = (e) => J(e, Je), qt = (e) => J(e, Ke), Kt = (e) => J(e, qe), le = (e) => J(e, et, !0), H = (e, t, o) => {
+  const r = Ue.exec(e);
   return r ? r[1] ? t(r[1]) : o(r[2]) : !1;
-}, q = (e, t, o = !1) => {
-  const r = He.exec(e);
+}, J = (e, t, o = !1) => {
+  const r = Ze.exec(e);
   return r ? r[1] ? t(r[1]) : o : !1;
-}, qe = (e) => e === "position" || e === "percentage", Ke = (e) => e === "image" || e === "url", Qe = (e) => e === "length" || e === "size" || e === "bg-size", et = (e) => e === "length", eo = (e) => e === "number", to = (e) => e === "family-name", tt = (e) => e === "shadow", oo = () => {
-  const e = z("color"), t = z("font"), o = z("text"), r = z("font-weight"), n = z("tracking"), a = z("leading"), s = z("breakpoint"), i = z("container"), l = z("spacing"), u = z("radius"), b = z("shadow"), m = z("inset-shadow"), w = z("text-shadow"), C = z("drop-shadow"), f = z("blur"), y = z("perspective"), k = z("aspect"), A = z("ease"), N = z("animate"), E = () => ["auto", "avoid", "all", "avoid-page", "page", "left", "right", "column"], I = () => [
+}, Je = (e) => e === "position" || e === "percentage", qe = (e) => e === "image" || e === "url", Ke = (e) => e === "length" || e === "size" || e === "bg-size", Qe = (e) => e === "length", Qt = (e) => e === "number", eo = (e) => e === "family-name", et = (e) => e === "shadow", to = () => {
+  const e = z("color"), t = z("font"), o = z("text"), r = z("font-weight"), n = z("tracking"), a = z("leading"), s = z("breakpoint"), i = z("container"), l = z("spacing"), m = z("radius"), b = z("shadow"), u = z("inset-shadow"), w = z("text-shadow"), C = z("drop-shadow"), f = z("blur"), y = z("perspective"), k = z("aspect"), A = z("ease"), N = z("animate"), E = () => ["auto", "avoid", "all", "avoid-page", "page", "left", "right", "column"], I = () => [
     "center",
     "top",
     "bottom",
@@ -309,17 +309,17 @@ const bt = (e, t) => {
     position: [d, c]
   }], Ae = () => ["no-repeat", {
     repeat: ["", "x", "y", "space", "round"]
-  }], Me = () => ["auto", "cover", "contain", Kt, Ht, {
+  }], Me = () => ["auto", "cover", "contain", qt, Zt, {
     size: [d, c]
-  }], ge = () => [he, K, W], R = () => [
+  }], ge = () => [he, q, W], R = () => [
     // Deprecated since Tailwind CSS v4.0.0
     "",
     "none",
     "full",
-    u,
+    m,
     d,
     c
-  ], T = () => ["", v, K, W], re = () => ["solid", "dashed", "dotted", "double"], Re = () => ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"], M = () => [v, he, Ye, Ie], Ee = () => [
+  ], T = () => ["", v, q, W], re = () => ["solid", "dashed", "dotted", "double"], Re = () => ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"], M = () => [v, he, Ye, Ie], Ee = () => [
     // Deprecated since Tailwind CSS v4.0.0
     "",
     "none",
@@ -334,11 +334,11 @@ const bt = (e, t) => {
       aspect: ["video"],
       blur: [_],
       breakpoint: [_],
-      color: [Dt],
+      color: [Bt],
       container: [_],
       "drop-shadow": [_],
       ease: ["in", "out", "in-out"],
-      font: [Zt],
+      font: [Ut],
       "font-weight": ["thin", "extralight", "light", "normal", "medium", "semibold", "bold", "extrabold", "black"],
       "inset-shadow": [_],
       leading: ["none", "tight", "snug", "normal", "relaxed", "loose"],
@@ -1019,7 +1019,7 @@ const bt = (e, t) => {
        * @see https://tailwindcss.com/docs/font-size
        */
       "font-size": [{
-        text: ["base", o, K, W]
+        text: ["base", o, q, W]
       }],
       /**
        * Font Smoothing
@@ -1050,7 +1050,7 @@ const bt = (e, t) => {
        * @see https://tailwindcss.com/docs/font-family
        */
       "font-family": [{
-        font: [qt, c, t]
+        font: [Jt, c, t]
       }],
       /**
        * Font Variant Numeric
@@ -1305,7 +1305,7 @@ const bt = (e, t) => {
           }, G, d, c],
           radial: ["", d, c],
           conic: [G, d, c]
-        }, Qt, Jt]
+        }, Kt, Ht]
       }],
       /**
        * Background Color
@@ -1654,7 +1654,7 @@ const bt = (e, t) => {
        * @see https://tailwindcss.com/docs/outline-width
        */
       "outline-w": [{
-        outline: ["", v, K, W]
+        outline: ["", v, q, W]
       }],
       /**
        * Outline Color
@@ -1692,7 +1692,7 @@ const bt = (e, t) => {
        * @see https://tailwindcss.com/docs/box-shadow#adding-an-inset-shadow
        */
       "inset-shadow": [{
-        "inset-shadow": ["none", m, le, ie]
+        "inset-shadow": ["none", u, le, ie]
       }],
       /**
        * Inset Box Shadow Color
@@ -2679,7 +2679,7 @@ const bt = (e, t) => {
        * @see https://tailwindcss.com/docs/stroke-width
        */
       "stroke-w": [{
-        stroke: [v, K, W, ve]
+        stroke: [v, q, W, ve]
       }],
       /**
        * Stroke
@@ -2754,7 +2754,7 @@ const bt = (e, t) => {
     },
     orderSensitiveModifiers: ["*", "**", "after", "backdrop", "before", "details-content", "file", "first-letter", "first-line", "marker", "placeholder", "selection"]
   };
-}, ro = /* @__PURE__ */ Nt(oo), no = /* @__PURE__ */ it({
+}, oo = /* @__PURE__ */ Lt(to), ro = /* @__PURE__ */ at({
   __name: "MagicCanvas",
   props: {
     canvasRef: { type: Function },
@@ -2766,33 +2766,33 @@ const bt = (e, t) => {
       if (!o.value)
         throw new Error("Canvas not found in DOM. Check ref link.");
       t.canvasRef(o.value);
-    }), lt(() => {
+    }), it(() => {
       if (!o.value)
         throw new Error("Canvas not found in DOM. Check ref link.");
       t.cleanup(o.value);
-    }), (r, n) => (dt(), ct("canvas", ut({
+    }), (r, n) => (ct(), lt("canvas", dt({
       ...r.$attrs,
-      class: Fe(ro)(r.$attrs.class, ["w-full", "h-full"])
+      class: Xe(oo)(r.$attrs.class, ["w-[100vw]", "h-[100vh]"])
     }, {
       ref_key: "canvas",
       ref: o
     }), " Sorry, your browser does not support canvas. ", 16));
   }
 });
-function ot(e) {
-  return mt() ? (ft(e), !0) : !1;
+function tt(e) {
+  return ut() ? (mt(e), !0) : !1;
 }
-const so = typeof window < "u" && typeof document < "u";
+const no = typeof window < "u" && typeof document < "u";
 typeof WorkerGlobalScope < "u" && globalThis instanceof WorkerGlobalScope;
-const ao = Object.prototype.toString, io = (e) => ao.call(e) === "[object Object]", lo = () => {
+const so = Object.prototype.toString, ao = (e) => so.call(e) === "[object Object]", io = () => {
 };
-function co(...e) {
+function lo(...e) {
   if (e.length !== 1)
-    return pt(...e);
+    return ft(...e);
   const t = e[0];
-  return typeof t == "function" ? Be(gt(() => ({ get: t, set: lo }))) : B(t);
+  return typeof t == "function" ? je(pt(() => ({ get: t, set: io }))) : B(t);
 }
-function uo(e, t) {
+function co(e, t) {
   function o(...r) {
     return new Promise((n, a) => {
       Promise.resolve(e(() => t.apply(this, r), { fn: t, thisArg: this, args: r })).then(n).catch(a);
@@ -2800,11 +2800,11 @@ function uo(e, t) {
   }
   return o;
 }
-const rt = (e) => e();
-function mo(e = rt, t = {}) {
+const ot = (e) => e();
+function uo(e = ot, t = {}) {
   const {
     initialState: o = "active"
-  } = t, r = co(o === "active");
+  } = t, r = lo(o === "active");
   function n() {
     r.value = !1;
   }
@@ -2814,48 +2814,48 @@ function mo(e = rt, t = {}) {
   const s = (...i) => {
     r.value && e(...i);
   };
-  return { isActive: Be(r), pause: n, resume: a, eventFilter: s };
+  return { isActive: je(r), pause: n, resume: a, eventFilter: s };
 }
 function ue(e) {
   return Array.isArray(e) ? e : [e];
 }
-function fo(e) {
-  return je();
+function mo(e) {
+  return We();
 }
-function po(e, t, o = {}) {
+function fo(e, t, o = {}) {
   const {
-    eventFilter: r = rt,
+    eventFilter: r = ot,
     ...n
   } = o;
-  return H(
+  return K(
     e,
-    uo(
+    co(
       r,
       t
     ),
     n
   );
 }
-function go(e, t, o = {}) {
+function po(e, t, o = {}) {
   const {
     eventFilter: r,
     initialState: n = "active",
     ...a
-  } = o, { eventFilter: s, pause: i, resume: l, isActive: u } = mo(r, { initialState: n });
-  return { stop: po(
+  } = o, { eventFilter: s, pause: i, resume: l, isActive: m } = uo(r, { initialState: n });
+  return { stop: fo(
     e,
     t,
     {
       ...a,
       eventFilter: s
     }
-  ), pause: i, resume: l, isActive: u };
+  ), pause: i, resume: l, isActive: m };
 }
-function nt(e, t = !0, o) {
-  fo() ? Z(e, o) : t ? e() : We(e);
+function rt(e, t = !0, o) {
+  mo() ? Z(e, o) : t ? e() : Fe(e);
 }
-function bo(e, t, o) {
-  return H(
+function go(e, t, o) {
+  return K(
     e,
     t,
     {
@@ -2864,7 +2864,7 @@ function bo(e, t, o) {
     }
   );
 }
-const U = so ? window : void 0;
+const U = no ? window : void 0;
 function j(e) {
   var t;
   const o = D(e);
@@ -2873,28 +2873,28 @@ function j(e) {
 function Le(...e) {
   const t = [], o = () => {
     t.forEach((i) => i()), t.length = 0;
-  }, r = (i, l, u, b) => (i.addEventListener(l, u, b), () => i.removeEventListener(l, u, b)), n = Q(() => {
+  }, r = (i, l, m, b) => (i.addEventListener(l, m, b), () => i.removeEventListener(l, m, b)), n = Q(() => {
     const i = ue(D(e[0])).filter((l) => l != null);
     return i.every((l) => typeof l != "string") ? i : void 0;
-  }), a = bo(
+  }), a = go(
     () => {
       var i, l;
       return [
-        (l = (i = n.value) == null ? void 0 : i.map((u) => j(u))) != null ? l : [U].filter((u) => u != null),
+        (l = (i = n.value) == null ? void 0 : i.map((m) => j(m))) != null ? l : [U].filter((m) => m != null),
         ue(D(n.value ? e[1] : e[0])),
-        ue(Fe(n.value ? e[2] : e[1])),
+        ue(Xe(n.value ? e[2] : e[1])),
         // @ts-expect-error - TypeScript gets the correct types, but somehow still complains
         D(n.value ? e[3] : e[2])
       ];
     },
-    ([i, l, u, b]) => {
-      if (o(), !i?.length || !l?.length || !u?.length)
+    ([i, l, m, b]) => {
+      if (o(), !i?.length || !l?.length || !m?.length)
         return;
-      const m = io(b) ? { ...b } : b;
+      const u = ao(b) ? { ...b } : b;
       t.push(
         ...i.flatMap(
           (w) => l.flatMap(
-            (C) => u.map((f) => r(w, C, f, m))
+            (C) => m.map((f) => r(w, C, f, u))
           )
         )
       );
@@ -2903,31 +2903,31 @@ function Le(...e) {
   ), s = () => {
     a(), o();
   };
-  return ot(o), s;
+  return tt(o), s;
 }
 // @__NO_SIDE_EFFECTS__
-function ho() {
-  const e = fe(!1), t = je();
+function bo() {
+  const e = fe(!1), t = We();
   return t && Z(() => {
     e.value = !0;
   }, t), e;
 }
 // @__NO_SIDE_EFFECTS__
-function vo(e) {
-  const t = /* @__PURE__ */ ho();
+function ho(e) {
+  const t = /* @__PURE__ */ bo();
   return Q(() => (t.value, !!e()));
 }
-const ce = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, de = "__vueuse_ssr_handlers__", wo = /* @__PURE__ */ yo();
-function yo() {
+const ce = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, de = "__vueuse_ssr_handlers__", vo = /* @__PURE__ */ wo();
+function wo() {
   return de in ce || (ce[de] = ce[de] || {}), ce[de];
 }
-function ko(e, t) {
-  return wo[e] || t;
+function yo(e, t) {
+  return vo[e] || t;
 }
-function xo(e) {
+function ko(e) {
   return e == null ? "any" : e instanceof Set ? "set" : e instanceof Map ? "map" : e instanceof Date ? "date" : typeof e == "boolean" ? "boolean" : typeof e == "string" ? "string" : typeof e == "object" ? "object" : Number.isNaN(e) ? "any" : "number";
 }
-const Co = {
+const xo = {
   boolean: {
     read: (e) => e === "true",
     write: (e) => String(e)
@@ -2961,16 +2961,16 @@ const Co = {
     write: (e) => e.toISOString()
   }
 }, Ne = "vueuse-storage";
-function So(e, t, o, r = {}) {
+function Co(e, t, o, r = {}) {
   var n;
   const {
     flush: a = "pre",
     deep: s = !0,
     listenToStorageChanges: i = !0,
     writeDefaults: l = !0,
-    mergeDefaults: u = !1,
+    mergeDefaults: m = !1,
     shallow: b,
-    window: m = U,
+    window: u = U,
     eventFilter: w,
     onError: C = (h) => {
       console.error(h);
@@ -2979,7 +2979,7 @@ function So(e, t, o, r = {}) {
   } = r, y = (b ? fe : B)(typeof t == "function" ? t() : t), k = Q(() => D(e));
   if (!o)
     try {
-      o = ko("getDefaultStorage", () => {
+      o = yo("getDefaultStorage", () => {
         var h;
         return (h = U) == null ? void 0 : h.localStorage;
       })();
@@ -2988,30 +2988,30 @@ function So(e, t, o, r = {}) {
     }
   if (!o)
     return y;
-  const A = D(t), N = xo(A), E = (n = r.serializer) != null ? n : Co[N], { pause: I, resume: P } = go(
+  const A = D(t), N = ko(A), E = (n = r.serializer) != null ? n : xo[N], { pause: I, resume: P } = po(
     y,
     (h) => ee(h),
     { flush: a, deep: s, eventFilter: w }
   );
-  H(k, () => L(), { flush: a });
+  K(k, () => L(), { flush: a });
   let Y = !1;
   const X = (h) => {
     f && !Y || L(h);
   }, g = (h) => {
     f && !Y || oe(h);
   };
-  m && i && (o instanceof Storage ? Le(m, "storage", X, { passive: !0 }) : Le(m, Ne, g)), f ? nt(() => {
+  u && i && (o instanceof Storage ? Le(u, "storage", X, { passive: !0 }) : Le(u, Ne, g)), f ? rt(() => {
     Y = !0, L();
   }) : L();
   function O(h, x) {
-    if (m) {
+    if (u) {
       const S = {
         key: k.value,
         oldValue: h,
         newValue: x,
         storageArea: o
       };
-      m.dispatchEvent(o instanceof Storage ? new StorageEvent("storage", S) : new CustomEvent(Ne, {
+      u.dispatchEvent(o instanceof Storage ? new StorageEvent("storage", S) : new CustomEvent(Ne, {
         detail: S
       }));
     }
@@ -3033,9 +3033,9 @@ function So(e, t, o, r = {}) {
     const x = h ? h.newValue : o.getItem(k.value);
     if (x == null)
       return l && A != null && o.setItem(k.value, E.write(A)), A;
-    if (!h && u) {
+    if (!h && m) {
       const S = E.read(x);
-      return typeof u == "function" ? u(S, A) : N === "object" && !Array.isArray(S) ? { ...A, ...S } : S;
+      return typeof m == "function" ? m(S, A) : N === "object" && !Array.isArray(S) ? { ...A, ...S } : S;
     } else return typeof x != "string" ? x : E.read(x);
   }
   function L(h) {
@@ -3052,7 +3052,7 @@ function So(e, t, o, r = {}) {
         } catch (x) {
           C(x);
         } finally {
-          h ? We(P) : P();
+          h ? Fe(P) : P();
         }
       }
     }
@@ -3062,40 +3062,40 @@ function So(e, t, o, r = {}) {
   }
   return y;
 }
-function zo(e, t, o = {}) {
+function So(e, t, o = {}) {
   const { window: r = U, ...n } = o;
   let a;
-  const s = /* @__PURE__ */ vo(() => r && "ResizeObserver" in r), i = () => {
+  const s = /* @__PURE__ */ ho(() => r && "ResizeObserver" in r), i = () => {
     a && (a.disconnect(), a = void 0);
   }, l = Q(() => {
-    const m = D(e);
-    return Array.isArray(m) ? m.map((w) => j(w)) : [j(m)];
-  }), u = H(
+    const u = D(e);
+    return Array.isArray(u) ? u.map((w) => j(w)) : [j(u)];
+  }), m = K(
     l,
-    (m) => {
+    (u) => {
       if (i(), s.value && r) {
         a = new ResizeObserver(t);
-        for (const w of m)
+        for (const w of u)
           w && a.observe(w, n);
       }
     },
     { immediate: !0, flush: "post" }
   ), b = () => {
-    i(), u();
+    i(), m();
   };
-  return ot(b), {
+  return tt(b), {
     isSupported: s,
     stop: b
   };
 }
-function Ao(e, t = { width: 0, height: 0 }, o = {}) {
+function zo(e, t = { width: 0, height: 0 }, o = {}) {
   const { window: r = U, box: n = "content-box" } = o, a = Q(() => {
-    var m, w;
-    return (w = (m = j(e)) == null ? void 0 : m.namespaceURI) == null ? void 0 : w.includes("svg");
-  }), s = fe(t.width), i = fe(t.height), { stop: l } = zo(
+    var u, w;
+    return (w = (u = j(e)) == null ? void 0 : u.namespaceURI) == null ? void 0 : w.includes("svg");
+  }), s = fe(t.width), i = fe(t.height), { stop: l } = So(
     e,
-    ([m]) => {
-      const w = n === "border-box" ? m.borderBoxSize : n === "content-box" ? m.contentBoxSize : m.devicePixelContentBoxSize;
+    ([u]) => {
+      const w = n === "border-box" ? u.borderBoxSize : n === "content-box" ? u.contentBoxSize : u.devicePixelContentBoxSize;
       if (r && a.value) {
         const C = j(e);
         if (C) {
@@ -3106,22 +3106,22 @@ function Ao(e, t = { width: 0, height: 0 }, o = {}) {
         const C = ue(w);
         s.value = C.reduce((f, { inlineSize: y }) => f + y, 0), i.value = C.reduce((f, { blockSize: y }) => f + y, 0);
       } else
-        s.value = m.contentRect.width, i.value = m.contentRect.height;
+        s.value = u.contentRect.width, i.value = u.contentRect.height;
     },
     o
   );
-  nt(() => {
-    const m = j(e);
-    m && (s.value = "offsetWidth" in m ? m.offsetWidth : t.width, i.value = "offsetHeight" in m ? m.offsetHeight : t.height);
+  rt(() => {
+    const u = j(e);
+    u && (s.value = "offsetWidth" in u ? u.offsetWidth : t.width, i.value = "offsetHeight" in u ? u.offsetHeight : t.height);
   });
-  const u = H(
+  const m = K(
     () => j(e),
-    (m) => {
-      s.value = m ? t.width : 0, i.value = m ? t.height : 0;
+    (u) => {
+      s.value = u ? t.width : 0, i.value = u ? t.height : 0;
     }
   );
   function b() {
-    l(), u();
+    l(), m();
   }
   return {
     width: s,
@@ -3131,16 +3131,16 @@ function Ao(e, t = { width: 0, height: 0 }, o = {}) {
 }
 function we(e, t, o = {}) {
   const { window: r = U } = o;
-  return So(e, t, r?.localStorage, o);
+  return Co(e, t, r?.localStorage, o);
 }
-const Se = () => window.devicePixelRatio ?? 1, Mo = (e, t) => {
+const Se = () => window.devicePixelRatio ?? 1, Ao = (e, t) => {
   const o = t.translateX ?? 0, r = t.translateY ?? 0;
   (o !== 0 || r !== 0) && e.translate(o, r);
   const n = t.scaleX ?? 1, a = t.scaleY ?? 1;
   (n !== 1 || a !== 1) && e.scale(n, a);
   const s = t.skewX ?? 0, i = t.skewY ?? 0;
   (s !== 0 || i !== 0) && e.transform(1, i, s, 1, 0, 0);
-}, st = (e) => {
+}, nt = (e) => {
   if (!e)
     throw new Error("canvas not found");
   const t = "value" in e ? e.value : e;
@@ -3150,23 +3150,23 @@ const Se = () => window.devicePixelRatio ?? 1, Mo = (e, t) => {
   if (!o)
     throw new Error("2d context not found");
   return o;
-}, Ro = {
+}, Mo = {
   middle: 1
-}, at = (e) => {
+}, st = (e) => {
   const { a: t, e: o, f: r } = e.getTransform(), n = Se(), a = t / n, s = o / n, i = r / n;
   return { panX: s, panY: i, zoom: a };
 }, xe = (e, t) => {
-  const o = t.canvas.getBoundingClientRect(), r = e.clientX - o.left, n = e.clientY - o.top, { panX: a, panY: s, zoom: i } = at(t), l = (r - a) / i, u = (n - s) / i;
-  return { x: l, y: u, zoom: i };
+  const o = t.canvas.getBoundingClientRect(), r = e.clientX - o.left, n = e.clientY - o.top, { panX: a, panY: s, zoom: i } = st(t), l = (r - a) / i, m = (n - s) / i;
+  return { x: l, y: m, zoom: i };
 }, Xo = (e, t) => {
-  const { panX: o, panY: r, zoom: n } = at(t), { x: a, y: s } = e;
+  const { panX: o, panY: r, zoom: n } = st(t), { x: a, y: s } = e;
   return {
     clientX: a * n + o,
     clientY: s * n + r,
     zoom: n
   };
-}, Eo = (e) => {
-  const t = B({ x: 0, y: 0 }), o = (r) => t.value = xe(r, st(e));
+}, Ro = (e) => {
+  const t = B({ x: 0, y: 0 }), o = (r) => t.value = xe(r, nt(e));
   return Z(() => {
     if (!e.value)
       throw new Error("Canvas not found in DOM. Check ref link.");
@@ -3177,7 +3177,7 @@ const Se = () => window.devicePixelRatio ?? 1, Mo = (e, t) => {
       r.removeEventListener("mousemove", o), r.removeEventListener("wheel", o);
     }
   };
-}, $ = 100, _e = 0.6, me = 0.25, To = (e) => {
+}, $ = 100, _e = 0.6, me = 0.25, Eo = (e) => {
   if (e <= me) return "00";
   if (e >= _e) return "";
   const t = String(
@@ -3186,7 +3186,7 @@ const Se = () => window.devicePixelRatio ?? 1, Mo = (e, t) => {
     )
   );
   return t.length === 1 ? `0${t}` : t;
-}, Po = ({ panX: e, panY: t, zoom: o }, r) => ({ draw: (a) => {
+}, To = ({ panX: e, panY: t, zoom: o }, r) => ({ draw: (a) => {
   if (o.value <= me) return;
   const s = xe(
     {
@@ -3200,10 +3200,10 @@ const Se = () => window.devicePixelRatio ?? 1, Mo = (e, t) => {
       clientY: window.innerHeight + $
     },
     a
-  ), l = e.value / o.value % $, u = t.value / o.value % $;
+  ), l = e.value / o.value % $, m = t.value / o.value % $;
   for (let b = s.x + l; b < i.x; b += $)
-    for (let m = s.y + u; m < i.y; m += $)
-      r.value(a, { x: b, y: m }, To(o.value));
+    for (let u = s.y + m; u < i.y; u += $)
+      r.value(a, { x: b, y: u }, Eo(o.value));
 } }), ye = {
   /** camera `panX` state in magic canvas - {@link Camera.state} */
   cameraPanX: (e) => `camera-pan-x-${e}`,
@@ -3211,11 +3211,11 @@ const Se = () => window.devicePixelRatio ?? 1, Mo = (e, t) => {
   cameraPanY: (e) => `camera-pan-y-${e}`,
   /** camera `zoom` state in magic canvas - {@link Camera.state} */
   cameraZoom: (e) => `camera-zoom-${e}`
-}, Oo = 0.2, Io = 10, Yo = 0.02, Ge = 1, Lo = (e, t) => {
+}, Po = 0.2, Oo = 10, Io = 0.02, Ge = 1, Yo = (e, t) => {
   const o = we(ye.cameraPanX(t), 0), r = we(ye.cameraPanY(t), 0), n = we(ye.cameraZoom(t), 1), a = (f) => {
-    const y = e.value.getBoundingClientRect(), k = f.clientX - y.left, A = f.clientY - y.top, N = Math.max(-100, Math.min(100, f.deltaY)), E = Math.exp(-N * Yo), I = Math.min(
-      Io,
-      Math.max(Oo, n.value * E)
+    const y = e.value.getBoundingClientRect(), k = f.clientX - y.left, A = f.clientY - y.top, N = Math.max(-100, Math.min(100, f.deltaY)), E = Math.exp(-N * Io), I = Math.min(
+      Oo,
+      Math.max(Po, n.value * E)
     ), P = I / n.value;
     o.value = k - (k - o.value) * P, r.value = A - (A - r.value) * P, n.value = I;
   }, s = (f) => {
@@ -3223,20 +3223,20 @@ const Se = () => window.devicePixelRatio ?? 1, Mo = (e, t) => {
   }, i = (f) => {
     f.preventDefault(), (!f.ctrlKey ? s : a)(f);
   };
-  let l = 0, u = 0, b = !1;
-  const m = (f) => {
-    b = f.button === Ro.middle, b && (l = f.clientX, u = f.clientY);
+  let l = 0, m = 0, b = !1;
+  const u = (f) => {
+    b = f.button === Mo.middle, b && (l = f.clientX, m = f.clientY);
   }, w = (f) => {
     b && (s({
       deltaX: l - f.clientX,
-      deltaY: u - f.clientY
-    }), l = f.clientX, u = f.clientY);
+      deltaY: m - f.clientY
+    }), l = f.clientX, m = f.clientY);
   }, C = () => {
-    l = 0, u = 0, b = !1;
+    l = 0, m = 0, b = !1;
   };
   return Z(() => {
     if (!e.value) throw new Error("canvas not found in DOM");
-    e.value.addEventListener("wheel", i, { passive: !1 }), e.value.addEventListener("mousedown", m), e.value.addEventListener("mousemove", w), document.addEventListener("mouseup", C);
+    e.value.addEventListener("wheel", i, { passive: !1 }), e.value.addEventListener("mousedown", u), e.value.addEventListener("mousemove", w), document.addEventListener("mouseup", C);
   }), {
     actions: {
       zoomIn: (f = 12.5) => a({
@@ -3262,11 +3262,11 @@ const Se = () => window.devicePixelRatio ?? 1, Mo = (e, t) => {
       translateY: r.value
     }),
     cleanup: (f) => {
-      f.removeEventListener("wheel", i), f.removeEventListener("mousedown", m), f.removeEventListener("mousemove", w), document.removeEventListener("mouseup", C);
+      f.removeEventListener("wheel", i), f.removeEventListener("mousedown", u), f.removeEventListener("mousemove", w), document.removeEventListener("mouseup", C);
     }
   };
-}, No = (e, t) => {
-  const { getTransform: o, ...r } = Lo(
+}, Lo = (e, t) => {
+  const { getTransform: o, ...r } = Yo(
     e,
     t
   ), n = Se(), a = {
@@ -3278,58 +3278,57 @@ const Se = () => window.devicePixelRatio ?? 1, Mo = (e, t) => {
     transformAndClear: (s) => {
       s.resetTransform(), s.clearRect(0, 0, s.canvas.width, s.canvas.height);
       const i = [a, o()];
-      for (const l of i) Mo(s, l);
+      for (const l of i) Ao(s, l);
     }
   };
-}, _o = 60, Xe = (e) => {
+}, No = 60, _o = (e) => {
   if (!e) throw new Error("Canvas not found in DOM. Check ref link.");
   const t = Se(), o = e.getBoundingClientRect();
   e.width = o.width * t, e.height = o.height * t;
 }, Fo = (e = {}) => {
-  const t = B(), o = Ao(t), r = B(() => {
-  }), n = B(() => {
+  const t = B();
+  zo(t);
+  const o = B(() => {
+  }), r = B(() => {
   });
-  let a;
+  let n;
   Z(() => {
-    Xe(t.value), a = setInterval(m, 1e3 / _o);
-  }), H(
-    [o.width, o.height],
-    () => Xe(t.value)
-  );
-  const { cleanup: s, ...i } = No(
+    _o(t.value), n = setInterval(b, 1e3 / No);
+  });
+  const { cleanup: a, ...s } = Lo(
     t,
     e?.storageKey ?? "[default-storage-key]"
-  ), { coordinates: l, cleanup: u } = Eo(t), b = Po(i.state, n), m = () => {
-    const w = st(t);
-    i.transformAndClear(w), b.draw(w), r.value(w);
+  ), { coordinates: i, cleanup: l } = Ro(t), m = To(s.state, r), b = () => {
+    const u = nt(t);
+    s.transformAndClear(u), m.draw(u), o.value(u);
   };
   return {
     canvas: t,
-    camera: i,
-    cursorCoordinates: l,
+    camera: s,
+    cursorCoordinates: i,
     ref: {
-      canvasRef: (w) => t.value = w,
-      cleanup: (w) => {
-        u(w), s(w), clearInterval(a);
+      canvasRef: (u) => t.value = u,
+      cleanup: (u) => {
+        l(u), a(u), clearInterval(n);
       }
     },
     draw: {
-      content: r,
-      backgroundPattern: n
+      content: o,
+      backgroundPattern: r
     }
   };
 }, Wo = {
   install(e) {
-    e.component("MagicCanvas", no);
+    e.component("MagicCanvas", ro);
   }
 };
 export {
-  no as MagicCanvas,
+  ro as MagicCanvas,
   Wo as MagicCanvasPlugin,
-  at as getCanvasTransform,
+  st as getCanvasTransform,
   Xo as getClientCoordinates,
   Se as getDevicePixelRatio,
   xe as getMagicCoordinates,
   Fo as useMagicCanvas,
-  Eo as useMagicCoordinates
+  Ro as useMagicCoordinates
 };
